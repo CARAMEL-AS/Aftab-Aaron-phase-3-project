@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+import { login } from '../../helper/api';
 
 const Login = (props) => {
 
@@ -16,13 +17,17 @@ const Login = (props) => {
     //     });
     // }
 
+    const loginHandler = async (name, email) => {
+        const user = await login(name, email);
+        setUser(user)
+    }
+
     const googleSignIn = () => {
-        console.log('Hello World')
         const auth = getAuth();
         signInWithPopup(auth, provider)
         .then((result) => {
             const user = result.user;
-            setUser(user)
+            loginHandler(user.displayName, user.email)
         }).catch((error) => {
             console.log('Error: ',error)
         });
