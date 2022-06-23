@@ -1,14 +1,24 @@
 import React, { useState, useEffect} from 'react';
+import { getBooks, getAuthers } from '../../helper/api';
+import { assignData } from '../../helper/dataHandler';
 
 const Home = (props) => {
 
-    useEffect(() => {
+    const { user } = props;
+    const [data, setData] = useState(null);
 
+    const getData = async () => {
+        setData(assignData(await getAuthers(), await getBooks()))
+    }
+
+    useEffect(() => {
+        getData();
     },[])
 
     return (
         <div>
             <h1>Home</h1>
+            <h5>Logout</h5>
         </div>
     )
 }
