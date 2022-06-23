@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import Login from './components/login';
+import Home from './components/home';
+import { initializeApp } from "firebase/app";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App = () => {
+
+  const [user, setUser] = useState(null);
+  const [pageDimensions, setPageDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth
+  });
+
+  const dimentionChangeListener = () => {
+    window.addEventListener('resize', () => {
+      setPageDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth
+      })
+    })
+  }
+
+  const initializeFirebaseApp = () => {
+    const envVars = process.env;
+    const firebaseConfig = {
+      apiKey: envVars.REACT_APP_apiKey,
+      authDomain: envVars.REACT_APP_authDomain,
+      projectId: envVars.REACT_APP_projectId,
+      storageBucket: envVars.REACT_APP_storageBucket,
+      messagingSenderId: envVars.REACT_APP_messagingSenderId,
+      appId: envVars.REACT_APP_appId,
+      measurementId: envVars.REACT_APP_measurementId
+    };
+    
+    initializeApp(firebaseConfig);
+  }
+
+  useEffect(() => {
+    dimentionChangeListener();
+    initializeFirebaseApp();
+  },[])
+
+  return(
+    <div style={{height: pageDimensions.height, width: pageDimensions.width}}>
+      {!user ? <Login setUser={setUser} /> : <Home user={user} />}
     </div>
-  );
+  )
+
 }
 
 export default App;
