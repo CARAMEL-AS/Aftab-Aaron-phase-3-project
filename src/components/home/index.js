@@ -15,6 +15,8 @@ const Home = (props) => {
         getData();
     },[])
 
+    console.log('Data: ',data)
+
     return (
         <div>
             <h1>Home</h1>

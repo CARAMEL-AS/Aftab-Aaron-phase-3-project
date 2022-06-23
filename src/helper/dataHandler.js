@@ -6,7 +6,7 @@ export const assignData = (authers, books) => {
                 autherBooks.push(books[o])
             }
         }
-        authers[i]['books'] = books;
+        authers[i]['books'] = autherBooks;
     }
     return authers;
 }
