@@ -34,7 +34,7 @@ const Home = (props) => {
 
     const renderItem = (author, index) => {
         return (
-            <AuthorCell key={index} author={author} select={setAuthorSelection} dimentions={dimentions} />
+            <AuthorCell key={index} author={author} select={setAuthorSelection} dimentions={dimentions} user={user} />
         )
     }
 
@@ -68,7 +68,7 @@ const Home = (props) => {
                     <p style={{fontWeight: '600', fontSize: 15, color: 'white'}}>LOGOUT</p>
                 </div>
             </div>
-            <div style={{width: dimentions.width, height: dimentions.height/1.25, position: 'absolute', bottom: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}} onClick={() => googleSignOut()}>
+            <div style={{width: dimentions.width, height: dimentions.height/1.25, position: 'absolute', bottom: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
                 {!loading ? (
                     data && (
                         <div style={{height: dimentions.height/1.255, width: dimentions.width/1.1}}>
@@ -77,7 +77,7 @@ const Home = (props) => {
                     )
                 ) : <p style={{fontSize: 20, fontWeight: 'bold'}}>LOADING...</p>}
             </div>
-            {authorSelection && <AuthorDialog author={authorSelection} updateBook={setNewBookForm} />}
+            {authorSelection && <AuthorDialog author={authorSelection} updateBook={setNewBookForm} dimentions={dimentions} close={setAuthorSelection} />}
             {newBookForm.visible && <BookForm oldBook={newBookForm.oldBook} />}
         </div>
     )
