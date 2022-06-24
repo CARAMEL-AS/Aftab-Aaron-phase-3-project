@@ -58,7 +58,7 @@ const Home = (props) => {
                     <p style={{fontSize: 30, fontWeight: 'bold', color: 'rgba(0,0,0,0.4)', marginLeft: '3%'}}>Welcome</p>
                     <p style={{fontSize: 30, fontWeight: 'bold', color: 'rgba(0,0,0,0.8)', marginLeft: '0.5%'}}>{user.name}</p>
                 </div>
-                <div style={{cursor: 'pointer', height: dimentions.height/14, width: dimentions.width/14, justifyContent: 'center', alignItems: 'center', display: 'flex', marginRight: '1%', backgroundColor: '#29c5f6', borderRadius: 7, marginTop: dimentions.height/17}}>
+                <div onClick={() => setNewBookForm({...newBookForm, visible: true})} style={{cursor: 'pointer', height: dimentions.height/14, width: dimentions.width/14, justifyContent: 'center', alignItems: 'center', display: 'flex', marginRight: '1%', backgroundColor: '#29c5f6', borderRadius: 7, marginTop: dimentions.height/17}}>
                     <img style={{height: 20, width: 20}} src={AddIcon} />
                     <p style={{fontWeight: '600', fontSize: 17, color: 'white'}}>ADD</p>
                 </div>
@@ -79,7 +79,7 @@ const Home = (props) => {
                 ) : <p style={{fontSize: 20, fontWeight: 'bold'}}>LOADING...</p>}
             </div>
             {authorSelection && <AuthorDialog author={authorSelection} updateBook={setNewBookForm} dimentions={dimentions} close={setAuthorSelection} updateBooks={getData} />}
-            {newBookForm.visible && <BookForm oldBook={newBookForm.oldBook} updateBooks={setData} />}
+            {newBookForm.visible && <BookForm oldBook={newBookForm.oldBook} updateBooks={setData} dimentions={dimentions} close={setNewBookForm} authorId={user.id} />}
         </div>
     )
 }
