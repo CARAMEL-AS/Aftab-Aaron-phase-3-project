@@ -51,7 +51,7 @@ const Home = (props) => {
 
     return (
         <div>
-            <h1>Home</h1>
+            <h1>Welcome {user.name}</h1>
             <div onClick={() => googleSignOut()}>
                 <h5>Logout</h5>
             </div>
