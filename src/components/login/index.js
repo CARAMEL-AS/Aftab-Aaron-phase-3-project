@@ -5,7 +5,7 @@ import GoogleIcon from '../../assets/google.png';
 
 const Login = (props) => {
 
-    const { setUser } = props;
+    const { setUser, dimentions } = props;
     const [provider, setProvider] = useState(null);
     const [GoogleButtonHighLight, setGoogleButtonHighLight] = useState(false);
 
@@ -36,19 +36,19 @@ const Login = (props) => {
     },[])
 
     return (
-        <div style={{height: '100%', width: '100%', textAlign: 'center', justifyContent: 'center' }}>
-            <div style={{marginTop: '10%'}}>
+        <div style={{height: dimentions.height, width: dimentions.width, textAlign: 'center', justifyContent: 'center' }}>
+            <div style={{marginTop: dimentions.height/5}}>
                 <p style={{fontSize: 40, fontWeight: 'bold'}}>BOOKS</p>
             </div>
             <div
                 onMouseEnter={() => setGoogleButtonHighLight(true)}
                 onMouseLeave={() => setGoogleButtonHighLight(false)}
                 style={{
-                    width: '20%',
-                    height: '10%',
+                    width: dimentions.width/6,
+                    height: dimentions.height/10,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    right: window.innerWidth/2.5,
+                    right: dimentions.width/2.43,
                     border: '1px solid black',
                     textAlign: 'center',
                     borderRadius: 10,
@@ -56,7 +56,8 @@ const Login = (props) => {
                     flexDirection: 'row',
                     backgroundColor: GoogleButtonHighLight ? 'rgba(0,0,0,0.2)' : 'white',
                     position: 'absolute',
-                    bottom: '10%'
+                    bottom: dimentions.height/10,
+                    cursor: 'pointer',
             }} onClick={googleSignIn}>
                     <img style={{height: 30, width: 30, marginRight: '8%'}} src={GoogleIcon} />
                     <h4>Google Sign-In</h4>
