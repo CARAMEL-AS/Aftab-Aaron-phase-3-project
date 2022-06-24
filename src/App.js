@@ -42,7 +42,7 @@ const App = () => {
 
   return(
     <div style={{height: pageDimensions.height, width: pageDimensions.width}}>
-      {!user ? <Login setUser={setUser} /> : <Home user={user} />}
+      {!user ? <Login setUser={setUser} /> : <Home user={user} setUser={setUser} />}
     </div>
   )
 
