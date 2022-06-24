@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { handleTime } from '../../../helper/dataHandler';
 import EditIcon from '../../../assets/edit.png';
 import DeleteIcon from '../../../assets/delete.png';
-import { deleteBook, updateBook } from '../../../helper/api';
+import { deleteBook } from '../../../helper/api';
 
 const BookCell = (props) => {
 
     const { book, dimentions, update, delBook } = props;
 
     const updateBookPopUp = () => {
-        updateBook({
+        update({
             visible: true,
             oldBook: book
         })

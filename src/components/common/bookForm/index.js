@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import { addBook, updateBook } from '../../../helper/api';
 import CloseIcon from '../../../assets/close.png';
+import { handleTime } from '../../../helper/dataHandler';
 
 const BookForm = (props) => {
 
-    const { dimentions, close, oldBook, authorId } = props;
+    const { dimentions, close, oldBook, authorId, updateBooks, update } = props;
     const [formData, setFormData] = useState({
-        title: '',
-        rating: 0,
-        relDate: ''
+        title: oldBook?.title ? oldBook?.title : '',
+        rating: oldBook?.rating ? oldBook?.rating : 0,
+        relDate: oldBook?.release_date ? handleTime(oldBook?.release_date) : ''
     })
+
+    console.log('Old Book: ',oldBook)
+
+    const updateBooksLibrary = () => {
+        updateBooks();
+        close({visible: false, oldBook: null});
+    }
 
     const newBookHandler = async () => {
         try {
-            const newBook = await addBook(formData.title, formData.rating, formData.relDate, authorId);
-            console.log('Updated Book: ',newBook)
+            await addBook(formData.title, formData.rating, formData.relDate, authorId);
+            updateBooksLibrary();
         } catch (err) {
             console.log('Update Book Failed: ',err)
         }
@@ -22,8 +30,8 @@ const BookForm = (props) => {
 
     const updateBookHandler = async () => {
         try {
-            const updatedBook = await updateBook(formData.title, formData.rating, formData.relDate, authorId, oldBook.id);
-            console.log('Updated Book: ',updatedBook)
+            await updateBook(formData.title, formData.rating, formData.relDate, authorId, oldBook.id);
+            updateBooksLibrary();
         } catch (err) {
             console.log('Update Book Failed: ',err)
         }
@@ -41,17 +49,17 @@ const BookForm = (props) => {
                     <div>
                         <div style={{height: dimentions.height/10, width: dimentions.width/5}}>
                             <p style={{fontWeight: 'bold', fontSize: 20}}>Title</p>
-                            <input onChange={(e) => setFormData({...formData, title: e})} type={'text'} style={{width: '95%', height: '50%', marginTop: '-4%'}}/>
+                            <input value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} type={'text'} style={{width: '95%', height: '50%', marginTop: '-4%'}}/>
                         </div>
                         <div style={{height: dimentions.height/10, width: dimentions.width/5}}>
                             <p style={{fontWeight: 'bold', fontSize: 20}}>Rating</p>
-                            <input onChange={(e) => setFormData({...formData, rating: e})} type={'number'} style={{width: '95%', height: '50%', backgroundColor: 'white', marginTop: '-4%'}} />
+                            <input value={formData.rating} onChange={(e) => setFormData({...formData, rating: e.target.value})} type={'number'} style={{width: '95%', height: '50%', backgroundColor: 'white', marginTop: '-4%'}} />
                         </div>
                         <div style={{height: dimentions.height/10, width: dimentions.width/5}}>
                             <p style={{fontWeight: 'bold', fontSize: 20}}>Release Date</p>
-                            <input onChange={(e) => setFormData({...formData, relDate: e})} type={'text'} style={{width: '95%', height: '50%', marginTop: '-4%'}}/>
+                            <input value={formData.relDate} onChange={(e) => setFormData({...formData, relDate: e.target.value})} type={'text'} style={{width: '95%', height: '50%', marginTop: '-4%'}}/>
                         </div>
-                        <div onClick={submitPressHandler} style={{height: dimentions.height/13, width: dimentions.width/5, backgroundColor: '#29c5f6', borderRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10%'}}>
+                        <div onClick={submitPressHandler} style={{cursor: 'pointer', height: dimentions.height/13, width: dimentions.width/5, backgroundColor: '#29c5f6', borderRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10%'}}>
                             <p style={{fontWeight: 'bold', fontSize: 15, color: 'white'}}>SUBMIT</p>
                         </div>
                     </div>

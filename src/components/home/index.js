@@ -49,8 +49,6 @@ const Home = (props) => {
         setAuthorSelection(null);
     },[newBookForm])
 
-    console.log('Books: ',data);
-
     return (
         <div>
             <div style={{flexDirection: 'row', display: 'flex', alignItems: 'center'}}>
@@ -79,7 +77,7 @@ const Home = (props) => {
                 ) : <p style={{fontSize: 20, fontWeight: 'bold'}}>LOADING...</p>}
             </div>
             {authorSelection && <AuthorDialog author={authorSelection} updateBook={setNewBookForm} dimentions={dimentions} close={setAuthorSelection} updateBooks={getData} />}
-            {newBookForm.visible && <BookForm oldBook={newBookForm.oldBook} updateBooks={setData} dimentions={dimentions} close={setNewBookForm} authorId={user.id} />}
+            {newBookForm.visible && <BookForm oldBook={newBookForm.oldBook} updateBooks={getData} dimentions={dimentions} close={setNewBookForm} authorId={user.id} />}
         </div>
     )
 }
