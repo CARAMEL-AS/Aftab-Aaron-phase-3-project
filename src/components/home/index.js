@@ -11,7 +11,7 @@ const Home = (props) => {
 
     const { user, setUser, dimentions } = props;
     const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [authorSelection, setAuthorSelection] = useState(null);
     const [newBookForm, setNewBookForm] = useState({
         visible: false,
@@ -28,7 +28,6 @@ const Home = (props) => {
     }
 
     const getData = async () => {
-        setLoading(true)
         setData(assignData(await getAuthers(), await getBooks()))
     }
 

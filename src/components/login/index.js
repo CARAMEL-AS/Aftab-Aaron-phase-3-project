@@ -11,7 +11,7 @@ const Login = (props) => {
 
     const loginHandler = async (name, email) => {
         const user = await login(name, email);
-        setUser(user)
+        setUser(user);
     }
 
     const googleSignIn = () => {
