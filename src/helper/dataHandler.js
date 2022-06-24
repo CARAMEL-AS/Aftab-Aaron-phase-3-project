@@ -10,3 +10,8 @@ export const assignData = (authers, books) => {
     }
     return authers;
 }
+
+export const handleTime = (date) => {
+    const newDate = new Date(date)
+    return `${newDate.getMonth()}/${newDate.getDate()}/${newDate.getFullYear()}`
+}

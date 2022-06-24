@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import BookCell from '../bookCell';
 
 const AuthorDialog = (props) => {
 
     const { author, updateBook, dimentions, close } = props;
+
+    const renderCell = (item, index) => {
+        return (
+            <BookCell key={index} book={item} dimentions={dimentions} />
+        )
+    }
 
     useEffect(() => {
         console.log('Render')
@@ -14,8 +21,8 @@ const AuthorDialog = (props) => {
                 <div style={{height: '10%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '1%' }}>
                     <p style={{fontSize: 25, fontWeight: 'bold'}}>{author.name}</p>
                 </div>
-                <div style={{height: '80%', width: '100%', backgroundColor: 'red', marginTop: '3%'}}>
-
+                <div style={{height: '80%', width: '100%', marginTop: '3%'}}>
+                    {author.books.map(renderCell)}
                 </div>
             </div>
         </div>
